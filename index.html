@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fractal Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #232526;
+            color: #eee;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            margin: 0;
+        }
+        h1 {
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            font-size: 2.7em;
+            letter-spacing: 0.08em;
+            text-shadow: 0 2px 8px #0077ff88, 0 0px 2px #fff2;
+            margin-top: 32px;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            margin: 0 10px;
+            padding: 10px 22px;
+            font-size: 1.1em;
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            background-color: #2389ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0077ff44;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px #00c6ff88;
+        }
+        canvas {
+            background: #181a1b;
+            display: block;
+            margin: 30px auto 10px auto;
+            border: 2px solid #0077ff;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px #0077ff33, 0 1px 2px #fff2;
+        }
+        .warning {
+            text-align:center;
+            color:#ff4444;
+            font-weight:bold;
+            margin-bottom:10px;
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .fractal-btn {
+            margin: 0 10px;
+            padding: 10px 22px;
+            font-size: 1.1em;
+            font-family: 'Orbitron', 'Arial Black', sans-serif;
+            background-color: #0077ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0077ff44;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+        .fractal-btn.active {
+            background: linear-gradient(90deg, #ff6600 0%, #ffbb00 100%);
+            color: #222;
+            box-shadow: 0 4px 16px #ff660088;
+        }
+        .fractal-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px #00c6ff88;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Fractal Generator</h1>
+    <div class="warning">
+        Warning: High fractal depth may cause lag or freeze your browser/computer!
+    </div>
+    <div class="controls">
+        <button id="kochBtn" class="fractal-btn">Koch Snowflake</button>
+        <button id="sierpinskiBtn" class="fractal-btn">Sierpinski Triangle</button>
+        <button id="mandelbrotBtn" class="fractal-btn">Mandelbrot</button>
+        <button id="zoomInBtn">Zoom In</button>
+        <button id="zoomOutBtn">Zoom Out</button>
+    </div>
+    <canvas id="fractalCanvas" width="600" height="600"></canvas>
+    <script src="fractal.js"></script>
+    <script>
+    // Highlight active fractal button
+    function updateActiveButton() {
+        const kochBtn = document.getElementById('kochBtn');
+        const sierpinskiBtn = document.getElementById('sierpinskiBtn');
+        const mandelbrotBtn = document.getElementById('mandelbrotBtn');
+        kochBtn.classList.remove('active');
+        sierpinskiBtn.classList.remove('active');
+        mandelbrotBtn.classList.remove('active');
+        switch (window.currentFractal) {
+            case 'sierpinski':
+                sierpinskiBtn.classList.add('active');
+                break;
+            case 'mandelbrot':
+                mandelbrotBtn.classList.add('active');
+                break;
+            default:
+                kochBtn.classList.add('active');
+        }
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(updateActiveButton, 100);
+        document.getElementById('kochBtn').addEventListener('click', function() {
+            window.currentFractal = 'koch';
+            updateActiveButton();
+        });
+        document.getElementById('sierpinskiBtn').addEventListener('click', function() {
+            window.currentFractal = 'sierpinski';
+            updateActiveButton();
+        });
+        document.getElementById('mandelbrotBtn').addEventListener('click', function() {
+            window.currentFractal = 'mandelbrot';
+            updateActiveButton();
+        });
+    });
+    </script>
+</body>
+</html>
