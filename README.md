@@ -3,7 +3,7 @@
 Interactive fractal explorer built with HTML, CSS, and JavaScript. Zoom, pan, and switch between multiple fractals in the browser.
 
 ## Live demo
-[Try it here →](https://orifibla.tech/fractal_JS/)
+[Try it here](https://orifibla.tech/fractal_JS/)
 
 ## Fractals included
 - Koch Snowflake
